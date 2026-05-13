@@ -19,19 +19,7 @@ $uRole = (string)($currentUser['role'] ?? 'admin');
 
 <?= $this->section('content') ?>
 <div class="app-wrap">
-    <aside class="sidebar">
-        <div class="sidebar-brand"><div class="sidebar-logo-icon" style="background:var(--ink);border:1px solid rgba(255,255,255,.15)"><i class="bi bi-shield-check" style="color:var(--leaf)"></i></div><div class="sidebar-brand-name">TechMada RH<span>Administration</span></div></div>
-        <div class="sidebar-section">Gestion</div>
-        <ul class="sidebar-nav">
-            <li><a href="<?= site_url('admin') ?>" class="active"><i class="bi bi-speedometer2"></i> Vue d'ensemble</a></li>
-            <li><a href="<?= site_url('rh') ?>"><i class="bi bi-inbox"></i> Toutes les demandes <span class="nav-badge alert"><?= esc((string)$pendingCount) ?></span></a></li>
-            <li><a href="<?= site_url('admin/employes') ?>"><i class="bi bi-people"></i> Employés</a></li>
-            <li><a href="<?= site_url('admin/employes') ?>"><i class="bi bi-building"></i> Départements</a></li>
-            <li><a href="<?= site_url('admin/employes') ?>"><i class="bi bi-tags"></i> Types de congé</a></li>
-            <li><a href="<?= site_url('admin/employes') ?>"><i class="bi bi-sliders"></i> Soldes annuels</a></li>
-        </ul>
-        <div class="sidebar-user"><div class="s-user-row"><div class="avatar" style="background:#5a2d82;width:32px;height:32px;font-size:.7rem"><?= esc($uInitials !== '' ? $uInitials : 'AD') ?></div><div><div class="user-name"><?= esc($uFullName !== '' ? $uFullName : 'Administrateur') ?></div><div class="user-role"><?= esc($uRole) ?></div></div><a href="<?= site_url('logout') ?>" style="margin-left:auto;color:rgba(255,255,255,.25);font-size:1.1rem"><i class="bi bi-box-arrow-right"></i></a></div></div>
-    </aside>
+    <?= view('layouts/sidebar', ['currentUser' => $currentUser, 'pendingCount' => $pendingCount]) ?>
     <div class="main">
         <div class="topbar"><div><div class="topbar-title">Vue d'ensemble</div><div class="topbar-breadcrumb">Administration</div></div><div class="topbar-actions"><a href="<?= site_url('admin/employes') ?>" class="btn-forest" style="padding:7px 14px;font-size:.82rem"><i class="bi bi-person-plus"></i> Ajouter un employé</a></div></div>
         <div class="content">

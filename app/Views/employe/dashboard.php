@@ -2,26 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="app-wrap">
-    <aside class="sidebar">
-        <div class="sidebar-brand">
-            <div class="sidebar-logo-icon"><i class="bi bi-briefcase"></i></div>
-            <div class="sidebar-brand-name">TechMada RH<span>Espace employé</span></div>
-        </div>
-        <div class="sidebar-section">Menu</div>
-        <ul class="sidebar-nav">
-            <li><a href="<?= site_url('employe') ?>" class="active"><i class="bi bi-grid-1x2"></i> Tableau de bord</a></li>
-            <li><a href="<?= site_url('employe/create') ?>"><i class="bi bi-plus-circle"></i> Nouvelle demande</a></li>
-            <li><a href="<?= site_url('employe/conges') ?>"><i class="bi bi-calendar3"></i> Mes demandes <span class="nav-badge alert">2</span></a></li>
-            <li><a href="#"><i class="bi bi-person"></i> Mon profil</a></li>
-        </ul>
-        <div class="sidebar-user">
-            <div class="s-user-row">
-                <div class="avatar av-green"><?= substr($employe['prenom'], 0, 1) . substr($employe['nom'], 0, 1) ?></div>
-                <div><div class="user-name"><?= esc($employe['prenom'] . ' ' . $employe['nom']) ?></div><div class="user-role"><?= esc(ucfirst($employe['role'])) ?></div></div>
-                <a href="<?= site_url('logout') ?>" style="margin-left:auto;color:rgba(255,255,255,.25);font-size:1.1rem" title="Déconnexion"><i class="bi bi-box-arrow-right"></i></a>
-            </div>
-        </div>
-    </aside>
+    <?= view('layouts/sidebar') ?>
     <div class="main">
         <div class="topbar">
             <div><div class="topbar-title">Tableau de bord</div><div class="topbar-breadcrumb">Accueil</div></div>

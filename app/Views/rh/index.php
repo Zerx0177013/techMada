@@ -2,19 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="app-wrap">
-    <aside class="sidebar">
-        <div class="sidebar-brand"><div class="sidebar-logo-icon"><i class="bi bi-person-check"></i></div><div class="sidebar-brand-name">TechMada RH<span>Espace responsable</span></div></div>
-        <div class="sidebar-section">Menu</div>
-        <ul class="sidebar-nav">
-            <li><a href="<?= site_url('rh') ?>" class="active"><i class="bi bi-inbox"></i> Demandes à traiter <span class="nav-badge alert"><?= esc((string) ($pendingCount ?? 0)) ?></span></a></li>
-            <li><a href="#"><i class="bi bi-archive"></i> Historique</a></li>
-            <li><a href="#"><i class="bi bi-people"></i> Soldes employés</a></li>
-        </ul>
-        <?php $u = session()->get('user'); ?>
-        <?php $uInitials = strtoupper(mb_substr((string)($u['prenom'] ?? ''), 0, 1) . mb_substr((string)($u['nom'] ?? ''), 0, 1)); ?>
-        <?php $roleLabel = (($u['role'] ?? '') === 'admin') ? 'Administrateur' : 'Responsable RH'; ?>
-        <div class="sidebar-user"><div class="s-user-row"><div class="avatar av-blue"><?= esc($uInitials ?: 'RH') ?></div><div><div class="user-name"><?= esc(trim((string)(($u['prenom'] ?? '') . ' ' . ($u['nom'] ?? '')))) ?></div><div class="user-role"><?= esc($roleLabel) ?></div></div><a href="<?= site_url('logout') ?>" style="margin-left:auto;color:rgba(255,255,255,.25);font-size:1.1rem"><i class="bi bi-box-arrow-right"></i></a></div></div>
-    </aside>
+    <?= view('layouts/sidebar', ['pendingCount' => $pendingCount ?? 0]) ?>
     <div class="main">
         <div class="topbar"><div><div class="topbar-title">Demandes à traiter</div><div class="topbar-breadcrumb"><a href="#">Accueil</a> <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Demandes</div></div><div class="topbar-actions"><span style="font-size:.8rem;color:var(--warn);background:var(--warn-bg);border:1px solid var(--warn-br);border-radius:6px;padding:5px 10px;display:flex;align-items:center;gap:5px"><i class="bi bi-hourglass-split"></i> <?= esc((string) ($pendingCount ?? 0)) ?> en attente</span></div></div>
         <div class="content">

@@ -2,17 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="app-wrap">
-    <aside class="sidebar">
-        <div class="sidebar-brand"><div class="sidebar-logo-icon" style="background:var(--ink);border:1px solid rgba(255,255,255,.15)"><i class="bi bi-shield-check" style="color:var(--leaf)"></i></div><div class="sidebar-brand-name">TechMada RH<span>Administration</span></div></div>
-        <ul class="sidebar-nav" style="margin-top:1rem">
-            <li><a href="<?= site_url('admin') ?>"><i class="bi bi-speedometer2"></i> Vue d'ensemble</a></li>
-            <li><a href="<?= site_url('rh') ?>"><i class="bi bi-inbox"></i> Toutes les demandes</a></li>
-            <li><a href="<?= site_url('admin/employes') ?>"><i class="bi bi-people"></i> Employés</a></li>
-            <li><a href="<?= site_url('admin/departements') ?>"><i class="bi bi-building"></i> Départements</a></li>
-            <li><a href="<?= site_url('admin/types-conge') ?>" class="active"><i class="bi bi-tags"></i> Types de congé</a></li>
-        </ul>
-        <div class="sidebar-user"><div class="s-user-row"><div class="avatar" style="background:#5a2d82;width:32px;height:32px;font-size:.7rem">AD</div><div><div class="user-name">Administrateur</div><div class="user-role">Admin système</div></div></div></div>
-    </aside>
+    <?= view('layouts/sidebar', ['pendingCount' => $pendingCount ?? 0]) ?>
     <div class="main">
         <div class="topbar"><div><div class="topbar-title">Gestion des types de congé</div><div class="topbar-breadcrumb"><a href="<?= site_url('admin') ?>">Admin</a> <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Types de congé</div></div></div>
         <div class="content">
