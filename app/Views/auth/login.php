@@ -29,11 +29,11 @@
                 <?= csrf_field() ?>
                 <div class="f-group">
                     <label class="f-label">Adresse email</label>
-                    <input name="email" type="email" class="f-input" placeholder="vous@techmada.com" value="<?= esc(old('email') ?? '') ?>" autocomplete="username" required />
+                    <input name="email" type="email" class="f-input" placeholder="vous@techmada.com" value="lucas.dev@techmada.com" autocomplete="username" required />
                 </div>
                 <div class="f-group">
                     <label class="f-label">Mot de passe</label>
-                    <input name="password" type="password" class="f-input" placeholder="••••••••" autocomplete="current-password" required />
+                    <input name="password" type="password" class="f-input" placeholder="••••••••" autocomplete="current-password" value ="password123" required />
                 </div>
                 <button type="submit" class="btn-primary" style="margin-top:.5rem">Se connecter <i class="bi bi-arrow-right-short"></i></button>
             </form>
