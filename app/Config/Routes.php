@@ -9,7 +9,7 @@ $routes->get('/', 'AuthController::showLoginForm');
 $routes->get('login', 'AuthController::showLoginForm');
 $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
-$routes->get('dashboard', 'EmployesController::dashboard',['filter' => 'auth']);
+$routes->get('dashboard', 'AuthController::dashboard', ['filter' => 'auth']);
 $routes->get('employe', 'EmployesController::dashboard', ['filter' => 'auth']);
 $routes->get('employe/create', 'EmployesController::create', ['filter' => 'auth']);
 $routes->post('employe/store', 'EmployesController::store', ['filter' => 'auth']);

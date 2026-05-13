@@ -25,4 +25,27 @@ class Employes extends Model
     {
         return $this->where('id', $id)->first();
     }
+
+    public function getAllEmployes()
+    {
+        return $this->findAll();
+    }
+
+    public function createEmploye(array $data)
+    {
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        return $this->insert($data);
+    }
+
+    public function updateEmploye(int $id, array $data)
+    {
+        if (isset($data['password'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        }
+        return $this->update($id, $data);
+    }
+    public function deleteEmploye(int $id)
+    {
+        return $this->delete($id);
+    }
 }
