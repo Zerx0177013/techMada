@@ -24,12 +24,21 @@
             <?php if ($msg = session()->getFlashdata('error')): ?>
                 <div class="flash flash-error"><i class="bi bi-exclamation-circle-fill"></i> <?= esc($msg) ?></div>
             <?php endif; ?>
-            <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap"><button style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--forest);background:var(--forest);color:var(--white);cursor:pointer">Tous (8)</button><button style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer">En attente (4)</button><button style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer">Approuvées (3)</button><button style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer">Refusées (1)</button><select class="f-select" style="font-size:.8rem;padding:6px 10px;width:auto;margin-left:auto"><option>Tous les départements</option><option>IT</option><option>Finance</option><option>Marketing</option></select></div>
+            <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap">
+                <button style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--forest);background:var(--forest);color:var(--white);cursor:pointer">Tous</button>
+                <select id="statutFilter" class="f-select" style="font-size:.8rem;padding:6px 10px;width:auto;margin-left:auto">
+                    <option value="">Tous les statuts</option>
+                    <option value="enAttente">En attente</option>
+                    <option value="approuvee">Approuvées</option>
+                    <option value="refusee">Refusées</option>
+                    <option value="annulee">Annulées</option>
+                </select>
+            </div>
             <div class="data-card">
                 <div class="data-card-head"><h3>Toutes les demandes</h3></div>
                 <table class="tbl">
                     <thead><tr><th>Employé</th><th>Type</th><th>Période</th><th>Durée</th><th>Solde dispo</th><th>Statut</th><th>Actions</th></tr></thead>
-                    <tbody>
+                    <tbody id="congesTableBody">
                         <?php foreach (($demandes ?? []) as $d): ?>
                             <?php
                                 $start = !empty($d['dateDebut']) ? new DateTime($d['dateDebut']) : null;
@@ -41,7 +50,7 @@
                                 $soldeDispo = $d['solde_dispo'];
                                 $insuffisant = $deductible && ($soldeDispo === null || (int) $soldeDispo < (int) $d['nbJours']);
                             ?>
-                            <tr>
+                            <tr data-statut="<?= esc($statut) ?>">
                                 <td>
                                     <div class="profile-row">
                                         <div class="avatar av-green" style="width:32px;height:32px;font-size:.7rem"><?= esc((string) ($d['initials'] ?? '—')) ?></div>
@@ -98,6 +107,7 @@
                                 </td>
                             </tr>
                         <?php endforeach; ?>
+                        <tr id="noRowsRow" style="display:none"><td colspan="7" class="td-muted" style="text-align:center">Aucune demande trouvée.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -137,4 +147,36 @@
         <div class="footer-app"><i class="bi bi-c-circle"></i> 2025 <span>TechMada RH</span></div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filter = document.getElementById('statutFilter');
+    const tbody = document.getElementById('congesTableBody');
+
+    if (!filter || !tbody) {
+        return;
+    }
+
+    const noRowsRow = document.getElementById('noRowsRow');
+    const rows = Array.from(tbody.querySelectorAll('tr')).filter((tr) => tr.id !== 'noRowsRow');
+
+    function applyFilter() {
+        const selected = filter.value;
+        let visibleCount = 0;
+
+        rows.forEach((tr) => {
+            const statut = tr.dataset.statut || '';
+            const show = selected === '' || statut === selected;
+            tr.style.display = show ? '' : 'none';
+            if (show) visibleCount++;
+        });
+
+        if (noRowsRow) {
+            noRowsRow.style.display = visibleCount === 0 ? '' : 'none';
+        }
+    }
+
+    filter.addEventListener('change', applyFilter);
+    applyFilter();
+});
+</script>
 <?= $this->endSection() ?>
