@@ -1,7 +1,5 @@
--- Désactiver la vérification des clés étrangères le temps de la création
 PRAGMA foreign_keys = OFF;
 
--- 1. Table : departements
 DROP TABLE IF EXISTS departements;
 CREATE TABLE departements (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -9,7 +7,6 @@ CREATE TABLE departements (
     description TEXT
 );
 
--- 2. Table : typesConge (Ex: types_conge)
 DROP TABLE IF EXISTS typesConge;
 CREATE TABLE typesConge (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,7 +15,6 @@ CREATE TABLE typesConge (
     deductible INTEGER NOT NULL CHECK (deductible IN (0, 1)) DEFAULT 1
 );
 
--- 3. Table : employes
 DROP TABLE IF EXISTS employes;
 CREATE TABLE employes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,7 +29,6 @@ CREATE TABLE employes (
     FOREIGN KEY (DepartementId) REFERENCES departements(id) ON DELETE SET NULL
 );
 
--- 4. Table : soldes
 DROP TABLE IF EXISTS soldes;
 CREATE TABLE soldes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,7 +42,6 @@ CREATE TABLE soldes (
     UNIQUE (EmployeId, TypeCongeId, annee)
 );
 
--- 5. Table : conges
 DROP TABLE IF EXISTS conges;
 CREATE TABLE conges (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -66,5 +60,4 @@ CREATE TABLE conges (
     FOREIGN KEY (TraitePar) REFERENCES employes(id) ON DELETE SET NULL
 );
 
--- Réactiver la vérification des clés étrangères
 PRAGMA foreign_keys = ON;
