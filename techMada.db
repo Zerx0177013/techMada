@@ -1,0 +1,70 @@
+
+PRAGMA foreign_keys = OFF;
+
+-- 1. Table : departements
+DROP TABLE IF EXISTS departements;
+CREATE TABLE departements (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    description TEXT
+);
+
+-- 2. Table : types_conge
+DROP TABLE IF EXISTS types_conge;
+CREATE TABLE types_conge (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    libelle TEXT NOT NULL,
+    jours_annuels INTEGER NOT NULL,
+    deductible INTEGER NOT NULL CHECK (deductible IN (0, 1)) DEFAULT 1
+);
+
+-- 3. Table : employes
+DROP TABLE IF EXISTS employes;
+CREATE TABLE employes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    prenom TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL CHECK (role IN ('employe', 'rh', 'admin')),
+    DepartementId INTEGER, -- Clé Étrangère (FK) vers departements
+    date_embauche TEXT NOT NULL,
+    actif INTEGER NOT NULL CHECK (actif IN (0, 1)) DEFAULT 1,
+    FOREIGN KEY (DepartementId) REFERENCES departements(id) ON DELETE SET NULL
+);
+
+-- 4. Table : soldes
+DROP TABLE IF EXISTS soldes;
+CREATE TABLE soldes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    EmployeId INTEGER NOT NULL,    -- Clé Étrangère (FK) vers employes
+    TypeCongeId INTEGER NOT NULL,  -- Clé Étrangère (FK) vers types_conge
+    annee INTEGER NOT NULL,
+    jours_attribues INTEGER NOT NULL,
+    jours_pris INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (EmployeId) REFERENCES employes(id) ON DELETE CASCADE,
+    FOREIGN KEY (TypeCongeId) REFERENCES types_conge(id) ON DELETE CASCADE,
+    UNIQUE (EmployeId, TypeCongeId, annee) -- Contrainte d'unicité pour éviter les doublons de ligne de solde
+);
+
+-- 5. Table : conges
+DROP TABLE IF EXISTS conges;
+CREATE TABLE conges (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    EmployeId INTEGER NOT NULL,    -- Clé Étrangère (FK) vers employes
+    TypeCongeId INTEGER NOT NULL,  -- Clé Étrangère (FK) vers types_conge
+    date_debut TEXT NOT NULL,
+    date_fin TEXT NOT NULL,
+    nb_jours INTEGER NOT NULL,
+    motif TEXT,
+    statut TEXT NOT NULL CHECK (statut IN ('en_attente', 'approuvee', 'refusee', 'annulee')) DEFAULT 'en_attente',
+    commentaire_rh TEXT,
+    created_at TEXT DEFAULT (datetime('now', 'localtime')),
+    TraitePar INTEGER,             -- Clé Étrangère (FK) vers employes (le RH qui a traité la demande)
+    FOREIGN KEY (EmployeId) REFERENCES employes(id) ON DELETE CASCADE,
+    FOREIGN KEY (TypeCongeId) REFERENCES types_conge(id) ON DELETE RESTRICT,
+    FOREIGN KEY (TraitePar) REFERENCES employes(id) ON DELETE SET NULL
+);
+
+
+PRAGMA foreign_keys = ON;
