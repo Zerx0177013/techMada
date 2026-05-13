@@ -7,9 +7,9 @@ INSERT INTO departements (nom, description) VALUES
 
 -- 2. Insertion des Types de Congé
 INSERT INTO typesConge (libelle, joursAnnuels, deductible) VALUES 
-('Congé Payé', 30, 1),
-('RTT', 12, 1),
-('Congé Sans Solde', 99, 0); -- Non déductible du solde principal
+('Conge maldadie', 30, 1),
+('Conge annuel', 12, 1),
+('Conge special', 99, 0); -- Non déductible du solde principal
 
 -- 3. Insertion des Employés 
 -- Mots de passe fictifs (en situation réelle, utilisez password_hash() en PHP)
