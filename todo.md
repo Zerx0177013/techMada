@@ -58,3 +58,14 @@
 - [ ] nombre d'absence 
 - [ ] liste de demande recentes
 - [ ] dynamisation de la view
+
+
+## CRUD 
+- [ ] employes
+  - [x] liste d'employes
+  - [x] liste de departement pour le form
+  - [ ] ajout filtre pour la liste d'employes
+  - [ ] route get pour aller vers la page
+  - [ ] route post pour envoyer les donnees
+  - [ ] fonction save pour sauvegarder
+- [ ] 
