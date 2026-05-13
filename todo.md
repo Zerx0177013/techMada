@@ -20,14 +20,35 @@
 
 
 ## Dashboard
-- [ ] a afficher (rohan)
-  - [ ] demande en attente
-  - [ ] demande approuvee
-  - [ ] nombre de conges restant
-  - [ ] demande refusee
-  - [ ] Congees de l'utilisateur connecte
-  - [ ] liste de demande de congee
-  - [ ] vue d'affichage (Tahina)
+- [x] a afficher (rohan)
+  - [x] demande en attente
+  - [x] demande approuvee
+  - [x] nombre de conges restant
+  - [x] demande refusee
+  - [x] Congees de l'utilisateur connecte
+  - [x] liste de demande de congee
+- [ ] vue d'affichage (Tahina)
+
+
+## Demande De Conge
+- [ ] foonction qui redirige vers la page
+  - [ ] dropdown type de congee (list de typeConge)
+- [ ] route get pour aller vers la page
+- [ ] route post pour envoyer les datas
+
+## Page de demande perso
+- [ ] fonction qui redirige vers la page
+  - [ ] liste de conge et leur statut
+- [ ] ajax pour le filtre de statut
+
+## Vue d'ensemble
+- [ ] liste d'employés
+- [ ] nombre de demande total
+  - [ ] approuve
+  - [ ] en attente
+- [ ] nombre de departement
+- [ ] nombre d'absence 
+- [ ] liste de demande recentes
 
 ## Model (Rohan)
 - [x] conges
