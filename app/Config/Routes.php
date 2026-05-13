@@ -5,11 +5,14 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
-$routes->get('login', 'Home::login');
-$routes->get('employe', 'Home::employeDashboard');
-$routes->get('employe/create', 'Home::employeCreate');
-$routes->get('employe/conges', 'Home::employeIndex');
-$routes->get('rh', 'Home::rhIndex');
-$routes->get('admin', 'Home::adminDashboard');
-$routes->get('admin/employes', 'Home::adminEmployes');
+$routes->get('/', 'AuthController::showLoginForm');
+$routes->get('login', 'AuthController::showLoginForm');
+$routes->post('login', 'AuthController::login');
+$routes->get('logout', 'AuthController::logout');
+$routes->get('dashboard', 'AuthController::dashboard');
+$routes->get('employe', 'Home::employeDashboard', ['filter' => 'auth']);
+$routes->get('employe/create', 'Home::employeCreate', ['filter' => 'auth']);
+$routes->get('employe/conges', 'Home::employeIndex', ['filter' => 'auth']);
+$routes->get('rh', 'Home::rhIndex', ['filter' => ['auth', 'role:rh,admin']]);
+$routes->get('admin', 'Home::adminDashboard', ['filter' => ['auth', 'role:admin']]);
+$routes->get('admin/employes', 'Home::adminEmployes', ['filter' => ['auth', 'role:admin']]);
