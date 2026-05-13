@@ -176,4 +176,21 @@ class EmployesController extends BaseController
             'conges' => $congesResult
         ]);
     }
+
+    public function cancelConge($congeId)
+    {
+        $userId = session()->get('user')['id'];
+        $congeModel = new Conges();
+        
+        $conge = $congeModel->where('id', $congeId)
+                            ->where('EmployeId', $userId)
+                            ->first();
+
+        if ($conge && $conge['statut'] === 'enAttente') {
+            $congeModel->update($congeId, ['statut' => 'annulee', 'commentaireRh' => 'Annulé par l\'employé']);
+            return redirect()->back()->with('success', 'La demande a été annulée avec succès.');
+        }
+
+        return redirect()->back()->with('error', 'Impossible d\'annuler cette demande.');
+    }
 }

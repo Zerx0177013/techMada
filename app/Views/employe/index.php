@@ -15,6 +15,12 @@
     <div class="main">
         <div class="topbar"><div><div class="topbar-title">Mes demandes de congé</div><div class="topbar-breadcrumb"><a href="<?= site_url('employe') ?>">Accueil</a> <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Mes demandes</div></div><div class="topbar-actions"><a href="<?= site_url('employe/create') ?>" class="btn-forest" style="padding:7px 14px;font-size:.82rem"><i class="bi bi-plus-lg"></i> Nouvelle demande</a></div></div>
         <div class="content">
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="flash flash-success"><i class="bi bi-check-circle-fill"></i> <?= session()->getFlashdata('success') ?></div>
+            <?php endif; ?>
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="flash flash-danger" style="color:var(--danger);background-color:#fee2e2;padding:10px;margin-bottom:15px;border-radius:5px;"><i class="bi bi-exclamation-triangle-fill"></i> <?= session()->getFlashdata('error') ?></div>
+            <?php endif; ?>
             <div class="data-card">
                 <div class="data-card-head">
                     <h3>Toutes mes demandes</h3>
@@ -47,7 +53,10 @@
                                 <?php endif; ?>
                                 <td>
                                     <?php if ($conge['statut'] === 'enAttente'): ?>
-                                        <button class="btn-sm btn-cancel"><i class="bi bi-x"></i> Annuler</button>
+                                        <form action="<?= site_url('employe/conges/cancel/' . $conge['id']) ?>" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir annuler cette demande ?');" style="display:inline;">
+                                            <?= csrf_field() ?>
+                                            <button type="submit" class="btn-sm btn-cancel"><i class="bi bi-x"></i> Annuler</button>
+                                        </form>
                                     <?php else: ?>
                                         <span class="td-muted" style="font-size:.75rem">—</span>
                                     <?php endif; ?>
@@ -101,7 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 let actionHtml = '<span class="td-muted" style="font-size:.75rem">—</span>';
                 if (conge.statut === 'enAttente') {
-                    actionHtml = '<button class="btn-sm btn-cancel"><i class="bi bi-x"></i> Annuler</button>';
+                    const cancelUrl = `<?= site_url('employe/conges/cancel/') ?>${conge.id}`;
+                    actionHtml = `
+                        <form action="${cancelUrl}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir annuler cette demande ?');" style="display:inline;">
+                            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                            <button type="submit" class="btn-sm btn-cancel"><i class="bi bi-x"></i> Annuler</button>
+                        </form>
+                    `;
                 }
 
                 const dateDebut = new Date(conge.dateDebut).toLocaleDateString('fr-FR', {day: '2-digit', month: 'short', year: 'numeric'});

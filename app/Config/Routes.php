@@ -17,5 +17,7 @@ $routes->get('employe/conges', 'EmployesController::conges', ['filter' => 'auth'
 $routes->get('rh', 'RhController::index', ['filter' => ['auth', 'role:rh,admin']]);
 $routes->post('rh/conges/(:num)/approve', 'RhController::approve/$1', ['filter' => ['auth', 'role:rh,admin']]);
 $routes->post('rh/conges/(:num)/refuse', 'RhController::refuse/$1', ['filter' => ['auth', 'role:rh,admin']]);
+$routes->post('employe/conges/cancel/(:num)', 'EmployesController::cancelConge/$1', ['filter' => 'auth']);
+$routes->get('rh', 'Home::rhIndex', ['filter' => ['auth', 'role:rh,admin']]);
 $routes->get('admin', 'Home::adminDashboard', ['filter' => ['auth', 'role:admin']]);
 $routes->get('admin/employes', 'Home::adminEmployes', ['filter' => ['auth', 'role:admin']]);
