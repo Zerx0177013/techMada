@@ -11,7 +11,7 @@
 # Flow
 ## Authentification
 - [x] creation de AuthController (Rohan)
-  - [ ] login
+  - [x] login
   - [x] logout
 - [x] creation de AuthFilter et RoleFilter (Rohan)
 - [ ] creation des routes principales (/employe, /rh, /admin) (Rohan)
