@@ -31,3 +31,9 @@ $routes->get('admin/departements/edit/(:num)', 'DepartementsController::index/$1
 $routes->post('admin/departements/store', 'DepartementsController::store', ['filter' => ['auth', 'role:admin']]);
 $routes->post('admin/departements/update/(:num)', 'DepartementsController::update/$1', ['filter' => ['auth', 'role:admin']]);
 $routes->post('admin/departements/delete/(:num)', 'DepartementsController::delete/$1', ['filter' => ['auth', 'role:admin']]);
+
+$routes->get('admin/types-conge', 'TypesCongeController::index', ['filter' => ['auth', 'role:admin']]);
+$routes->get('admin/types-conge/edit/(:num)', 'TypesCongeController::index/$1', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/types-conge/store', 'TypesCongeController::store', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/types-conge/update/(:num)', 'TypesCongeController::update/$1', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/types-conge/delete/(:num)', 'TypesCongeController::delete/$1', ['filter' => ['auth', 'role:admin']]);
