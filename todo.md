@@ -14,10 +14,20 @@
   - [x] login
   - [x] logout
 - [x] creation de AuthFilter et RoleFilter (Rohan)
-- [ ] creation des routes principales (/employe, /rh, /admin) (Tahina)
-- [ ] implementation des password_hash et  verify (Rohan)
-- [ ] creation de vue login (Tahina)
+- [x] creation des routes principales (/employe, /rh, /admin) (Tahina)
+- [x] implementation des password_hash et  verify (Rohan)
+- [x] creation de vue login (Tahina)
 
+
+## Dashboard
+- [ ] a afficher (rohan)
+  - [ ] demande en attente
+  - [ ] demande approuvee
+  - [ ] nombre de conges restant
+  - [ ] demande refusee
+  - [ ] Congees de l'utilisateur connecte
+  - [ ] liste de demande de congee
+  - [ ] vue d'affichage (Tahina)
 
 ## Model (Rohan)
 - [x] conges
