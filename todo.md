@@ -29,6 +29,27 @@
   - [x] liste de demande de congee
 - [ ] vue d'affichage (Tahina)
 
+
+## Demande De Conge
+- [ ] foonction qui redirige vers la page
+  - [ ] dropdown type de congee (list de typeConge)
+- [ ] route get pour aller vers la page
+- [ ] route post pour envoyer les datas
+
+## Page de demande perso
+- [ ] fonction qui redirige vers la page
+  - [ ] liste de conge et leur statut
+- [ ] ajax pour le filtre de statut
+
+## Vue d'ensemble
+- [ ] liste d'employés
+- [ ] nombre de demande total
+  - [ ] approuve
+  - [ ] en attente
+- [ ] nombre de departement
+- [ ] nombre d'absence 
+- [ ] liste de demande recentes
+
 ## Model (Rohan)
 - [x] conges
 - [x] departements
