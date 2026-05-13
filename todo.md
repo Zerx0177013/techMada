@@ -27,14 +27,14 @@
   - [x] demande refusee
   - [x] Congees de l'utilisateur connecte
   - [x] liste de demande de congee
-- [ ] vue d'affichage (Tahina)
+- [x] vue d'affichage (Tahina)
 
 
 ## Demande De Conge
-- [ ] foonction qui redirige vers la page
-  - [ ] dropdown type de congee (list de typeConge)
-- [ ] route get pour aller vers la page
-- [ ] route post pour envoyer les datas
+- [x] foonction qui redirige vers la page
+  - [x] dropdown type de congee (list de typeConge)
+- [x] route get pour aller vers la page
+- [x] route post pour envoyer les datas
 
 ## Page de demande perso
 - [ ] fonction qui redirige vers la page

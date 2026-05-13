@@ -147,4 +147,33 @@ class EmployesController extends BaseController
 
         return redirect()->to('/employe')->with('success', 'Votre demande de congé a bien été soumise. Elle est en attente de validation.');
     }
+
+    public function conges()
+    {
+        $userId = session()->get('user')['id'];
+        $model = new Employes();
+        $employe = $model->getInformation($userId);
+
+        $congeModel = new Conges();
+        $builder = $congeModel->select('conges.*, typesConge.libelle as type_libelle')
+                              ->where('EmployeId', $userId)
+                              ->join('typesConge', 'conges.TypeCongeId = typesConge.id')
+                              ->orderBy('conges.createdAt', 'DESC');
+
+        $statut = $this->request->getGet('statut');
+        if ($statut && $statut !== 'Tous les statuts' && $statut !== '') {
+            $builder->where('statut', $statut);
+        }
+
+        $congesResult = $builder->findAll();
+
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['conges' => $congesResult]);
+        }
+
+        return view('employe/index', [
+            'employe' => $employe,
+            'conges' => $congesResult
+        ]);
+    }
 }
