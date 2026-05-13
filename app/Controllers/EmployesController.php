@@ -61,5 +61,90 @@ class EmployesController extends BaseController
         return view('employe/dashboard', ['employe' => $employe]);
     }
 
-    
+    public function create()
+    {
+        $userId = session()->get('user')['id'];
+        $model = new Employes();
+        $employe = $model->getInformation($userId);
+
+        $typesCongeModel = new \App\Models\TypesConge();
+        $typesConges = $typesCongeModel->findAll();
+
+        $soldesModel = new Soldes();
+        // Pour l'année en cours
+        $annee = date('Y');
+        $soldes = $soldesModel->select('soldes.*, typesConge.libelle as type_libelle')
+                              ->where('EmployeId', $userId)
+                              ->where('annee', $annee)
+                              ->join('typesConge', 'soldes.TypeCongeId = typesConge.id')
+                              ->findAll();
+
+        $soldesParType = [];
+        foreach ($soldes as $s) {
+            $soldesParType[$s['TypeCongeId']] = $s;
+        }
+
+        return view('employe/create', [
+            'employe' => $employe,
+            'typesConges' => $typesConges,
+            'soldesParType' => $soldesParType
+        ]);
+    }
+
+    public function store()
+    {
+        $userId = session()->get('user')['id'];
+        
+        $rules = [
+            'type_conge' => 'required|integer',
+            'date_debut' => 'required|valid_date',
+            'date_fin'   => 'required|valid_date',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $typeCongeId = $this->request->getPost('type_conge');
+        $dateDebut = $this->request->getPost('date_debut');
+        $dateFin = $this->request->getPost('date_fin');
+        $motif = $this->request->getPost('motif');
+
+        $start = strtotime($dateDebut);
+        $end = strtotime($dateFin);
+        
+        if ($end < $start) {
+            return redirect()->back()->withInput()->with('error', 'La date de fin doit être après ou égale à la date de début.');
+        }
+
+        $nbJours = round(($end - $start) / 86400) + 1;
+
+        $soldesModel = new Soldes();
+        $solde = $soldesModel->where('EmployeId', $userId)
+                             ->where('TypeCongeId', $typeCongeId)
+                             ->where('annee', date('Y'))
+                             ->first();
+                             
+        $typesCongeModel = new \App\Models\TypesConge();
+        $typeConge = $typesCongeModel->find($typeCongeId);
+
+        if ($typeConge && $typeConge['deductible'] == 1) {
+            if (!$solde || ($solde['joursAttribues'] - $solde['joursPris']) < $nbJours) {
+                return redirect()->back()->withInput()->with('error', 'Solde insuffisant pour cette demande.');
+            }
+        }
+
+        $congeModel = new Conges();
+        $congeModel->insert([
+            'EmployeId'   => $userId,
+            'TypeCongeId' => $typeCongeId,
+            'dateDebut'   => $dateDebut,
+            'dateFin'     => $dateFin,
+            'nbJours'     => $nbJours,
+            'motif'       => $motif,
+            'statut'      => 'enAttente'
+        ]);
+
+        return redirect()->to('/employe')->with('success', 'Votre demande de congé a bien été soumise. Elle est en attente de validation.');
+    }
 }
