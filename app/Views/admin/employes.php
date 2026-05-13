@@ -61,12 +61,23 @@
                 </form>
             </div>
             <div class="data-card">
-                <div class="data-card-head"><h3>Tous les employés</h3><div style="display:flex;gap:6px"><input type="text" class="f-input" placeholder="Rechercher..." style="width:200px;padding:6px 10px;font-size:.8rem"/><select class="f-select" style="font-size:.8rem;padding:6px 10px;width:auto"><option>Tous les depts</option><option>IT</option><option>Finance</option></select></div></div>
+                <div class="data-card-head">
+                    <h3>Tous les employés</h3>
+                    <div style="display:flex;gap:6px">
+                        <input type="text" id="searchInput" class="f-input" placeholder="Rechercher..." style="width:200px;padding:6px 10px;font-size:.8rem"/>
+                        <select class="f-select" id="deptFilter" style="font-size:.8rem;padding:6px 10px;width:auto">
+                            <option value="">Tous les depts</option>
+                            <?php foreach($departements as $dept): ?>
+                                <option value="<?= htmlspecialchars($dept['nom']) ?>"><?= htmlspecialchars($dept['nom']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
                 <table class="tbl">
                     <thead><tr><th>Employé</th><th>Département</th><th>Rôle</th><th>Embauche</th><th>Statut</th><th>Actions</th></tr></thead>
                     <tbody>
                         <?php foreach($employes as $emp): ?>
-                        <tr <?= !$emp['actif'] ? 'style="opacity:.5"' : '' ?>>
+                        <tr <?= !$emp['actif'] ? 'style="opacity:.5"' : '' ?> data-dept="<?= htmlspecialchars($emp['dept_nom'] ?? 'Aucun') ?>" data-search="<?= strtolower(htmlspecialchars($emp['prenom'] . ' ' . $emp['nom'] . ' ' . $emp['email'])) ?>">
                             <td>
                                 <div class="profile-row">
                                     <div class="avatar av-green" style="width:32px;height:32px;font-size:.68rem">
@@ -107,4 +118,36 @@
         <div class="footer-app"><i class="bi bi-c-circle"></i> 2025 <span>TechMada RH</span></div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const deptFilter = document.getElementById('deptFilter');
+    const tbody = document.querySelector('.tbl tbody');
+    const rows = tbody.querySelectorAll('tr');
+
+    function filterTable() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const dept = deptFilter.value;
+
+        rows.forEach(row => {
+            const searchData = row.getAttribute('data-search') || '';
+            const deptData = row.getAttribute('data-dept') || '';
+            
+            const matchesSearch = searchData.includes(searchTerm);
+            const matchesDept = dept === '' || deptData === dept;
+
+            if (matchesSearch && matchesDept) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    searchInput.addEventListener('input', filterTable);
+    deptFilter.addEventListener('change', filterTable);
+});
+</script>
+
 <?= $this->endSection() ?>

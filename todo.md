@@ -62,5 +62,10 @@
 
 ## CRUD 
 - [ ] employes
-  - [ ] liste d'employes
-  - [ ] liste de departement pour le form
+  - [x] liste d'employes
+  - [x] liste de departement pour le form
+  - [ ] ajout filtre pour la liste d'employes
+  - [ ] route get pour aller vers la page
+  - [ ] route post pour envoyer les donnees
+  - [ ] fonction save pour sauvegarder
+- [ ] 
