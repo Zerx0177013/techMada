@@ -58,3 +58,9 @@
 - [ ] nombre d'absence 
 - [ ] liste de demande recentes
 - [ ] dynamisation de la view
+
+
+## CRUD 
+- [ ] employes
+  - [ ] liste d'employes
+  - [ ] liste de departement pour le form
