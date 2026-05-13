@@ -15,12 +15,12 @@ INSERT INTO typesConge (libelle, joursAnnuels, deductible) VALUES
 -- Mots de passe fictifs (en situation réelle, utilisez password_hash() en PHP)
 -- Tous les comptes ont pour mot de passe : "password123"
 INSERT INTO employes (nom, prenom, email, password, role, DepartementId, dateEmbauche, actif) VALUES 
-('Gérard', 'Alain', 'admin@techmada.com', '$2y$10$vK6kK3SOm/pYqXG.O7XUbuD98hO7O3Hl5KzWvWnQ5D8pZc8aY3eWG', 'admin', 1, '2022-01-15', 1),
-('Dubois', 'Martine', 'martine.rh@techmada.com', '$2y$10$vK6kK3SOm/pYqXG.O7XUbuD98hO7O3Hl5KzWvWnQ5D8pZc8aY3eWG', 'rh', 2, '2023-03-01', 1),
-('Martin', 'Jean', 'jean.rh@techmada.com', '$2y$10$vK6kK3SOm/pYqXG.O7XUbuD98hO7O3Hl5KzWvWnQ5D8pZc8aY3eWG', 'rh', 2, '2024-05-12', 1),
-('Dupont', 'Lucas', 'lucas.dev@techmada.com', '$2y$10$vK6kK3SOm/pYqXG.O7XUbuD98hO7O3Hl5KzWvWnQ5D8pZc8aY3eWG', 'employe', 3, '2024-09-01', 1),
-('Durand', 'Chloé', 'chloe.dev@techmada.com', '$2y$10$vK6kK3SOm/pYqXG.O7XUbuD98hO7O3Hl5KzWvWnQ5D8pZc8aY3eWG', 'employe', 3, '2025-01-10', 1),
-('Ancien', 'Robert', 'robert.ex@techmada.com', '$2y$10$vK6kK3SOm/pYqXG.O7XUbuD98hO7O3Hl5KzWvWnQ5D8pZc8aY3eWG', 'employe', 3, '2020-05-20', 0); -- Compte inactif pour test
+('Gérard', 'Alain', 'admin@techmada.com', '$2y$10$Mxc5XrQ1jzgifGez6vNeJerr2/ZvSkp2WOiNJFq/GwL4glowJ3e1a', 'admin', 1, '2022-01-15', 1),
+('Dubois', 'Martine', 'martine.rh@techmada.com', '$2y$10$Mxc5XrQ1jzgifGez6vNeJerr2/ZvSkp2WOiNJFq/GwL4glowJ3e1a', 'rh', 2, '2023-03-01', 1),
+('Martin', 'Jean', 'jean.rh@techmada.com', '$2y$10$Mxc5XrQ1jzgifGez6vNeJerr2/ZvSkp2WOiNJFq/GwL4glowJ3e1a', 'rh', 2, '2024-05-12', 1),
+('Dupont', 'Lucas', 'lucas.dev@techmada.com', '$2y$10$Mxc5XrQ1jzgifGez6vNeJerr2/ZvSkp2WOiNJFq/GwL4glowJ3e1a', 'employe', 3, '2024-09-01', 1),
+('Durand', 'Chloé', 'chloe.dev@techmada.com', '$2y$10$Mxc5XrQ1jzgifGez6vNeJerr2/ZvSkp2WOiNJFq/GwL4glowJ3e1a', 'employe', 3, '2025-01-10', 1),
+('Ancien', 'Robert', 'robert.ex@techmada.com', '$2y$10$Mxc5XrQ1jzgifGez6vNeJerr2/ZvSkp2WOiNJFq/GwL4glowJ3e1a', 'employe', 3, '2020-05-20', 0); -- Compte inactif pour test
 
 -- 4. Insertion des Soldes pour l'année 2026
 -- On attribue les compteurs de congés pour l'année en cours aux employés actifs
