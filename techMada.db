@@ -1,4 +1,4 @@
-
+-- Désactiver la vérification des clés étrangères le temps de la création
 PRAGMA foreign_keys = OFF;
 
 -- 1. Table : departements
@@ -9,12 +9,12 @@ CREATE TABLE departements (
     description TEXT
 );
 
--- 2. Table : types_conge
-DROP TABLE IF EXISTS types_conge;
-CREATE TABLE types_conge (
+-- 2. Table : typesConge (Ex: types_conge)
+DROP TABLE IF EXISTS typesConge;
+CREATE TABLE typesConge (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     libelle TEXT NOT NULL,
-    jours_annuels INTEGER NOT NULL,
+    joursAnnuels INTEGER NOT NULL,
     deductible INTEGER NOT NULL CHECK (deductible IN (0, 1)) DEFAULT 1
 );
 
@@ -27,8 +27,8 @@ CREATE TABLE employes (
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     role TEXT NOT NULL CHECK (role IN ('employe', 'rh', 'admin')),
-    DepartementId INTEGER, -- Clé Étrangère (FK) vers departements
-    date_embauche TEXT NOT NULL,
+    DepartementId INTEGER,
+    dateEmbauche TEXT NOT NULL,
     actif INTEGER NOT NULL CHECK (actif IN (0, 1)) DEFAULT 1,
     FOREIGN KEY (DepartementId) REFERENCES departements(id) ON DELETE SET NULL
 );
@@ -37,34 +37,34 @@ CREATE TABLE employes (
 DROP TABLE IF EXISTS soldes;
 CREATE TABLE soldes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    EmployeId INTEGER NOT NULL,    -- Clé Étrangère (FK) vers employes
-    TypeCongeId INTEGER NOT NULL,  -- Clé Étrangère (FK) vers types_conge
+    EmployeId INTEGER NOT NULL,
+    TypeCongeId INTEGER NOT NULL,
     annee INTEGER NOT NULL,
-    jours_attribues INTEGER NOT NULL,
-    jours_pris INTEGER NOT NULL DEFAULT 0,
+    joursAttribues INTEGER NOT NULL,
+    joursPris INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (EmployeId) REFERENCES employes(id) ON DELETE CASCADE,
-    FOREIGN KEY (TypeCongeId) REFERENCES types_conge(id) ON DELETE CASCADE,
-    UNIQUE (EmployeId, TypeCongeId, annee) -- Contrainte d'unicité pour éviter les doublons de ligne de solde
+    FOREIGN KEY (TypeCongeId) REFERENCES typesConge(id) ON DELETE CASCADE,
+    UNIQUE (EmployeId, TypeCongeId, annee)
 );
 
 -- 5. Table : conges
 DROP TABLE IF EXISTS conges;
 CREATE TABLE conges (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    EmployeId INTEGER NOT NULL,    -- Clé Étrangère (FK) vers employes
-    TypeCongeId INTEGER NOT NULL,  -- Clé Étrangère (FK) vers types_conge
-    date_debut TEXT NOT NULL,
-    date_fin TEXT NOT NULL,
-    nb_jours INTEGER NOT NULL,
+    EmployeId INTEGER NOT NULL,
+    TypeCongeId INTEGER NOT NULL,
+    dateDebut TEXT NOT NULL,
+    dateFin TEXT NOT NULL,
+    nbJours INTEGER NOT NULL,
     motif TEXT,
-    statut TEXT NOT NULL CHECK (statut IN ('en_attente', 'approuvee', 'refusee', 'annulee')) DEFAULT 'en_attente',
-    commentaire_rh TEXT,
-    created_at TEXT DEFAULT (datetime('now', 'localtime')),
-    TraitePar INTEGER,             -- Clé Étrangère (FK) vers employes (le RH qui a traité la demande)
+    statut TEXT NOT NULL CHECK (statut IN ('enAttente', 'approuvee', 'refusee', 'annulee')) DEFAULT 'enAttente',
+    commentaireRh TEXT,
+    createdAt TEXT DEFAULT (datetime('now', 'localtime')),
+    TraitePar INTEGER,
     FOREIGN KEY (EmployeId) REFERENCES employes(id) ON DELETE CASCADE,
-    FOREIGN KEY (TypeCongeId) REFERENCES types_conge(id) ON DELETE RESTRICT,
+    FOREIGN KEY (TypeCongeId) REFERENCES typesConge(id) ON DELETE RESTRICT,
     FOREIGN KEY (TraitePar) REFERENCES employes(id) ON DELETE SET NULL
 );
 
-
+-- Réactiver la vérification des clés étrangères
 PRAGMA foreign_keys = ON;
