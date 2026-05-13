@@ -14,6 +14,14 @@
   - [x] login
   - [x] logout
 - [x] creation de AuthFilter et RoleFilter (Rohan)
-- [ ] creation des routes principales (/employe, /rh, /admin) (Rohan)
+- [ ] creation des routes principales (/employe, /rh, /admin) (Tahina)
 - [ ] implementation des password_hash et  verify (Rohan)
 - [ ] creation de vue login (Tahina)
+
+
+## Model (Rohan)
+- [x] conges
+- [x] departements
+- [x] employes
+- [x] soldes
+- [x] typesConge
