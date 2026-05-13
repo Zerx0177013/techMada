@@ -58,7 +58,7 @@ class EmployesController extends BaseController
 
         $employe['soldes'] = $soldes;
         
-        return view('employes/dashboard', ['employe' => $employe]);
+        return view('employe/dashboard', ['employe' => $employe]);
     }
 
     
