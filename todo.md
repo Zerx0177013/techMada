@@ -27,28 +27,7 @@
   - [x] demande refusee
   - [x] Congees de l'utilisateur connecte
   - [x] liste de demande de congee
-- [ ] vue d'affichage (Tahina)
-
-
-## Demande De Conge
-- [ ] foonction qui redirige vers la page
-  - [ ] dropdown type de congee (list de typeConge)
-- [ ] route get pour aller vers la page
-- [ ] route post pour envoyer les datas
-
-## Page de demande perso
-- [ ] fonction qui redirige vers la page
-  - [ ] liste de conge et leur statut
-- [ ] ajax pour le filtre de statut
-
-## Vue d'ensemble
-- [ ] liste d'employés
-- [ ] nombre de demande total
-  - [ ] approuve
-  - [ ] en attente
-- [ ] nombre de departement
-- [ ] nombre d'absence 
-- [ ] liste de demande recentes
+- [x] vue d'affichage (Tahina)
 
 ## Model (Rohan)
 - [x] conges
@@ -56,3 +35,26 @@
 - [x] employes
 - [x] soldes
 - [x] typesConge
+
+## Demande De Conge (Rohan)
+- [x] foonction qui redirige vers la page
+  - [x] dropdown type de congee (list de typeConge)
+- [x] route get pour aller vers la page
+- [x] route post pour envoyer les datas
+- [x] dynamisation de la view
+
+## Page de demande perso (Rohan)
+- [x] fonction qui redirige vers la page
+  - [x] liste de conge et leur statut
+- [x] ajax pour le filtre de statut
+- [x] dynamisation de la view
+
+## Vue d'ensemble (Tahina)
+- [ ] liste d'employés
+- [ ] nombre de demande total
+  - [ ] approuve
+  - [ ] en attente
+- [ ] nombre de departement
+- [ ] nombre d'absence 
+- [ ] liste de demande recentes
+- [ ] dynamisation de la view
