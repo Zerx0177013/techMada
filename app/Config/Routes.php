@@ -21,4 +21,13 @@ $routes->post('employe/conges/cancel/(:num)', 'EmployesController::cancelConge/$
 $routes->get('rh', 'Home::rhIndex', ['filter' => ['auth', 'role:rh,admin']]);
 $routes->get('admin', 'AdminController::dashboard', ['filter' => ['auth', 'role:admin']]);
 $routes->get('admin/employes', 'AdminController::employes', ['filter' => ['auth', 'role:admin']]);
+$routes->get('admin/employes/edit/(:num)', 'AdminController::employes/$1', ['filter' => ['auth', 'role:admin']]);
 $routes->post('admin/employes/store', 'AdminController::storeEmploye', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/employes/update/(:num)', 'AdminController::updateEmploye/$1', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/employes/toggle/(:num)', 'AdminController::toggleEmploye/$1', ['filter' => ['auth', 'role:admin']]);
+
+$routes->get('admin/departements', 'DepartementsController::index', ['filter' => ['auth', 'role:admin']]);
+$routes->get('admin/departements/edit/(:num)', 'DepartementsController::index/$1', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/departements/store', 'DepartementsController::store', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/departements/update/(:num)', 'DepartementsController::update/$1', ['filter' => ['auth', 'role:admin']]);
+$routes->post('admin/departements/delete/(:num)', 'DepartementsController::delete/$1', ['filter' => ['auth', 'role:admin']]);
