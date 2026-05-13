@@ -1,7 +1,7 @@
 # SETUP (Rohan et Tahina)
-- [ ] creation du projet CodeIgniter 
-- [ ] installation de la base sqlite
-- [ ] configuration de l'environnement
+- [x] creation du projet CodeIgniter 
+- [x] installation de la base sqlite
+- [x] configuration de l'environnement
 
 # Base 
 - [ ] creation de la base sqlite (Rohan)
@@ -10,8 +10,10 @@
 
 # Flow
 ## Authentification
-- [ ] creation de AuthController (Rohan)
-- [ ] creation de AuthFilter et RoleFilter (Rohan)
+- [x] creation de AuthController (Rohan)
+  - [x] login
+  - [x] logout
+- [x] creation de AuthFilter et RoleFilter (Rohan)
 - [ ] creation des routes principales (/employe, /rh, /admin) (Rohan)
 - [ ] implementation des password_hash et  verify (Rohan)
 - [ ] creation de vue login (Tahina)
