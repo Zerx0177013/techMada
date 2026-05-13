@@ -20,14 +20,14 @@
 
 
 ## Dashboard
-- [ ] a afficher (rohan)
-  - [ ] demande en attente
-  - [ ] demande approuvee
-  - [ ] nombre de conges restant
-  - [ ] demande refusee
-  - [ ] Congees de l'utilisateur connecte
-  - [ ] liste de demande de congee
-  - [ ] vue d'affichage (Tahina)
+- [x] a afficher (rohan)
+  - [x] demande en attente
+  - [x] demande approuvee
+  - [x] nombre de conges restant
+  - [x] demande refusee
+  - [x] Congees de l'utilisateur connecte
+  - [x] liste de demande de congee
+- [ ] vue d'affichage (Tahina)
 
 ## Model (Rohan)
 - [x] conges
