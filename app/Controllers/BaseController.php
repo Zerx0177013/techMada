@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
-    protected $helpers = ['url'];
+    protected $helpers = ['url', 'form'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
